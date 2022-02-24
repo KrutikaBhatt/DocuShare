@@ -1,0 +1,6 @@
+@media (max-width: 600px) {
+    .responsive_logo {
+        height : 100px;
+        width :160px;
+    }
+}
