@@ -20,17 +20,15 @@ const data = [
     title: 'Collaborate your documents easily',
     contents: (
       <div>
-        Get your blood tests delivered at let collect sample from the victory of
-        the managements that supplies best design system guidelines ever.
+        Instant Sign, Modify or Reject your documents. Never miss your pending documents and take care of deadlines.
       </div>
     ),
   },
   {
-    title: `Build your team's knowledge base`,
+    title: `Marksheet based collaboration for Institutes`,
     contents: (
       <div>
-        Get your blood tests delivered at let collect sample from the victory of
-        the managements that supplies best design system guidelines ever.
+        Restrict areas on the marksheet for colleges to edit and sign.
       </div>
     ),
   },

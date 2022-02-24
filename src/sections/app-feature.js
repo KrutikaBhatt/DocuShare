@@ -9,27 +9,27 @@ import check from 'assets/images/icons/check-circle.png';
 const data = [
   {
     id: 1,
-    label: 'Medical and vision',
+    label: 'Heirchial Signing',
   },
   {
     id: 2,
-    label: 'Life insurance',
+    label: 'Team Reviews',
   },
   {
     id: 3,
-    label: '400(k) savings',
+    label: 'Digital Signatures',
   },
   {
     id: 4,
-    label: 'HSAs and FSAs',
+    label: 'SHA-256 Encrypted',
   },
   {
     id: 5,
-    label: 'Commuter benefits',
+    label: 'Interactive Dashboard',
   },
   {
     id: 6,
-    label: '529 college savings',
+    label: 'Based on latest technologies',
   },
 ];
 
@@ -42,8 +42,8 @@ const AppFeature = () => {
             <SectionHeading
               emoji={emoji}
               sx={styles.heading}
-              title="Built in one app to make instant reply with in lowest minutes"
-              description="Get your tests delivered at let home collect sample from the victory of the managements that supplies best design system guidelines ever."
+              title="Create Organizations and Assign a Reviewing Team"
+              description="Assigning a review team,heirarchial signing,etc for a single document is pretty easy with Docushare."
             />
             <Box sx={styles.features}>
               {data?.map(({ id, label }) => (
