@@ -74,7 +74,92 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *        description: Failed to send email
  */
 
+/**
+ * @swagger
+ * /auth/login:
+ *  post:
+ *    tags:
+ *      - Authentication
+ *    summary: Logging in Admin
+ *    parameters:
+ *      - in: body
+ *        name: body
+ *        description: Logging in User with username and password
+ *        required: true
+ *        example: {"username":"Test@123456","password":"Testing123"}
+ *    responses:
+ *      '200':
+ *        description: Logged in succesfully
+ */
 
+/**
+ * @swagger
+ * /auth/logout:
+ *  post:
+ *      tags:
+ *      - Authentication
+ *      description: Logging out User
+ *      responses:
+ *         '200':
+ *              description: Logging out User
+ *         '404':
+ *              description: Failed to logout
+ */
+ 
+
+/**
+ * @swagger
+ * /auth/forgotPassword:
+ *  post:
+ *    tags:
+ *      - Authentication
+ *    summary: Emailing password reset
+ *    parameters:
+ *      - in: body
+ *        name: body
+ *        description: Emailing password reset
+ *        required: true
+ *        example: {"email":"krutikabhatt222@gmail.com", "forgot_pass_page_url":"http://209.209.9.60:5000/student/forgotPass"}
+ *    responses:
+ *      '200':
+ *        description: successful operation
+ *      '500':
+ *        description: Failed to send email
+ */
+
+/**
+ * @swagger
+ * /auth/reset-password:
+ *  post:
+ *    tags:
+ *      - Authentication
+ *    summary: Password reset
+ *    parameters:
+ *      - in: body
+ *        name: body
+ *        description: Password reset
+ *        required: true
+ *        example: {"token":"","new_password":""}
+ *    responses:
+ *      '200':
+ *        description: successful operation
+ */
+
+
+/**
+ * @swagger
+ * /dashboard:
+ *  get:
+ *      tags:
+ *      - Dashboard
+ *      description: Dashboard routes
+ *      responses:
+ *         '200':
+ *              description: dashboard count
+ *         '404':
+ *              description: Failed to do so
+ */
+ 
  db.sync().then(() => {
     app.listen(PORT, console.log(`Server started on port ${PORT}`));
 }).catch(err => console.log("Error: " + err));
