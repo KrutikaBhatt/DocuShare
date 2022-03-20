@@ -7,7 +7,7 @@ import NavbarDrawer from './navbar-drawer';
 import Image from 'components/image';
 import Logo from 'components/logo';
 import { NavLink } from 'components/link';
-
+import Link from 'next/link'
 import menuItems from './header.data';
 import lock from 'assets/images/icons/lock.png';
 
@@ -59,10 +59,14 @@ export default function Header() {
                 <Flex sx={styles.buttonGroup}>
                   <button sx={styles.login}>
                     <Image src={lock} alt="lock icon" />
-                    Login
+                    <a href="/login" style={{ color: 'inherit', textDecoration: 'inherit',cursor:'pointer'}}>
+                      Login
+                    </a>
                   </button>
                   <Button variant="text" sx={styles.getStarted}>
-                    Get Started
+                  <a href="/signup" style={{ color: 'inherit', textDecoration: 'inherit',cursor:'pointer'}}>
+                      SignUp
+                    </a>
                   </Button>
                 </Flex>
                 <NavbarDrawer />
@@ -177,5 +181,12 @@ const styles = {
     path: {
       stroke: 'text',
     },
+  },
+  a: {
+    cursor: 'pointer',
+    transition: 'all 0.3s ease-in-out 0s',
+    color: 'inherit', 
+    textDecoration: 'inherit',
+    underline: 'none'
   },
 };

@@ -3,7 +3,7 @@ import { jsx, Box, Flex, Container, Heading, Text } from 'theme-ui';
 import { rgba } from 'polished';
 import Image from 'components/image';
 import SubscriptionForm from 'components/subscription-form';
-import illustration from 'assets/images/signature.jpg';
+import illustration from 'assets/images/signature-bg.png';
 import paypal from 'assets/images/paypal.png';
 import google from 'assets/images/google.png';
 import dropbox from 'assets/images/dropbox.png';
