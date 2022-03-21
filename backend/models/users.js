@@ -15,7 +15,7 @@ const User = db.define('user',{
 	
 	status:{
 		type:Sequelize.INTEGER,
-		defaultValue:0
+		defaultValue:1
 	},
 
     proof: {

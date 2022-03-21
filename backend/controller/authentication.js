@@ -7,6 +7,11 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 var nodemailer = require('nodemailer');
 const fs = require('fs');
+const crypto = require("crypto");
+const SHA256 = require('crypto-js/sha256');
+const db = require('../config/database');
+const cookieSession = require('cookie-session');
+
 var transport = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
@@ -18,14 +23,18 @@ var transport = nodemailer.createTransport({
     }
 });
 
+const computeHash=(previous_block)=>{
+  return SHA256(JSON.stringify(previous_block)).toString();
+}
+
 const login = async(req,res)=>{
     try {
-        var username = req.body.username;
+        var email = req.body.email;
         var password = req.body.password;
 
         var sqlCheck = await User.findOne({
             where:{
-                username : username
+                email : email
             }
 
         });
@@ -33,7 +42,7 @@ const login = async(req,res)=>{
         if (!sqlCheck) {
             return res.status(203).json({
               success: 0,
-              message: "Username not registered",
+              message: "Email not registered",
             });
           } else {
               if(password == ""){
@@ -63,13 +72,13 @@ const login = async(req,res)=>{
               });
               const Sessioncheck = await Session.findOne({
                 where : {
-                    index :sqlCheck.dataValues.index
+                    user_id :sqlCheck.dataValues.index
                 }
               })
               if(!Sessioncheck){
                 // Create a session
                 const session_object ={
-                  index:sqlCheck.dataValues.index,
+                  user_id:sqlCheck.dataValues.index,
                   jwt_token:JWT_token,
                   last_requested_at:new Date()
                 };
@@ -79,31 +88,26 @@ const login = async(req,res)=>{
                   return res.status(200).json({
                     success:1,
                     message : "Login successfull",
-                    username : sqlCheck.dataValues.username,
                     email : sqlCheck.dataValues.email,
-                    role: sqlCheck.dataValues.role
                   })
                 })
 
               }
               else{
-                console.log("Updated");
                 const updated ={
                     jwt_token:JWT_token,
                     last_requested_at:new Date()
                 };
 
                 await Session.update(updated,{
-                  where :{index :sqlCheck.dataValues.index}
+                  where :{user_id :sqlCheck.dataValues.index}
                 })
                 .then(async num =>{
                   if(num ==1){
                     return res.status(200).json({
                       success:1,
                       message : "Login successfull",
-                      username : sqlCheck.dataValues.username,
                       email : sqlCheck.dataValues.email,
-                      role: sqlCheck.dataValues.role
                     })
                   }
                   else{
@@ -122,14 +126,11 @@ const login = async(req,res)=>{
 const registerUser = async(req,res)=>{
   try {
     let{
-      username,
-      role,
       password,
       email,
-      status
     }  = req.body;
 
-    if(username ==null || password ==null ||email ==null){
+    if(password ==null ||email ==null){
       return res.status(404).send("Please provide the complete information")
     }
 
@@ -146,32 +147,24 @@ const registerUser = async(req,res)=>{
         });
     }
 
-    var sqlCheck1 = await User.findOne({
-      where:{
-          username : username
-      },
-    });
-
-    if(sqlCheck1){
-        return res.status(409).json({
-            success:0,
-            error :"This username already exists. Please select another"
-        });
-    }
+    
 
     const salt = bcrypt.genSaltSync(10);
     password = bcrypt.hashSync(password, salt);
-    var create_admin = {
-      username : username,
+    const query = 'select * from docushare.users where users.index=(SELECT MAX(users.index) AS LastID FROM docushare.users);'
+    var previous_block = await db.query(query);
+    var previous_hash = computeHash(previous_block[0][0]);
+
+    var create_user = {
       password : password,
-      role :role,
       email:email,
-      status : status
+      proof:1,
+      previous_hash:previous_hash,
     };
 
-    await User.create(create_admin).then(
+    await User.create(create_user).then(
       data =>{
-        return res.status(200).send("The Admin created successfully");
+        return res.status(200).send("The User is created successfully");
       }
     )
     .catch(err =>{
@@ -256,7 +249,7 @@ const forgotPassword = async(req,res) =>{
               `,
       };
 
-      const JWT_token = generateToken(myobj);
+      //const JWT_token = generateToken(myobj);
      
       transport.sendMail(myobj, async (error, info) => {
         if (error) {

@@ -60,13 +60,13 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *  post:
  *    tags:
  *      - Authentication
- *    summary: Adding a Admin
+ *    summary: Adding a User
  *    parameters:
  *      - in: body
  *        name: body
- *        description: Adding the Admin data
+ *        description: Adding the user data
  *        required: true
- *        example: {"email":"krutikabhatt222@gmail.com", "username":"Krutika#123","password":"asdfghjkl","role":1}
+ *        example: {"email":"krutikabhatt222@gmail.com","password":"asdfghjkl"}
  *    responses:
  *      '200':
  *        description: successful operation
@@ -80,13 +80,13 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *  post:
  *    tags:
  *      - Authentication
- *    summary: Logging in Admin
+ *    summary: Logging in as User
  *    parameters:
  *      - in: body
  *        name: body
- *        description: Logging in User with username and password
+ *        description: Logging in User with email and password
  *        required: true
- *        example: {"username":"Test@123456","password":"Testing123"}
+ *        example: {"email":"krutikabhatt222@gmail.com","password":"Testing123"}
  *    responses:
  *      '200':
  *        description: Logged in succesfully
@@ -119,7 +119,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *        name: body
  *        description: Emailing password reset
  *        required: true
- *        example: {"email":"krutikabhatt222@gmail.com", "forgot_pass_page_url":"http://209.209.9.60:5000/student/forgotPass"}
+ *        example: {"email":"krutikabhatt222@gmail.com", "forgot_pass_page_url":"http://localhost:3000/user/forgotPass"}
  *    responses:
  *      '200':
  *        description: successful operation
