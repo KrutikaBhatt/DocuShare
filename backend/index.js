@@ -5,7 +5,6 @@ const {BACKEND_SERVER_IP_ADDR, PORT} = require('./env');
 
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 
@@ -20,16 +19,10 @@ db.authenticate().then(() => {
 
 const app = express();
 
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(cors("*"));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.use('/', require('./routes/routes'));
-
 
 
 app.use('/', require('./routes/routes'));

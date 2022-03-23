@@ -7,4 +7,7 @@ module.exports ={
 
     ZOHO_PASS : "krutika%3012",
     SENDER_MAIL : "docushare.connect@gmail.com",
+
+    CDN_ACCESS : "153c8aa7-a7f4-41fd-b218-281769530ed300921646-2269-46f2-a34f-577d00079afc",
+    CDN_BUCKET : "docushare",
 }
