@@ -43,7 +43,7 @@ export default function AuthHeader() {
                     </a>
                   </button>
                   <Button variant="text" sx={styles.getStarted}>
-                  <a href="/signup" style={{ color: 'inherit', textDecoration: 'inherit',cursor:'pointer'}}>
+                  <a href="/signin" style={{ color: 'inherit', textDecoration: 'inherit',cursor:'pointer'}}>
                       SignUp
                     </a>
                   </Button>
