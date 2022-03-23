@@ -2,22 +2,33 @@ const Sequelize = require('sequelize');
 const db = require('../config/database');
 
 
-const User = db.define('user',{
-	index : {
+const Document = db.define('document',{
+	doc_id : {
 		type : Sequelize.INTEGER,
 		allowNull :false,
 		autoIncrement:true,
         primaryKey:true,
 	},
-	password:Sequelize.STRING,
-
-	email:Sequelize.STRING,
-	
+	owner_id :{
+        type:Sequelize.STRING,
+        allowNull : false,
+    },
+    shared_hash :{
+        type:Sequelize.STRING,
+        allowNull : true,
+    },
 	status:{
 		type:Sequelize.INTEGER,
 		defaultValue:1
 	},
-
+    type: {
+        type: Sequelize.STRING,
+        allowNull : false
+    },
+    link : {
+        type: Sequelize.STRING,
+        allowNull : false,
+    },
     proof: {
         type : Sequelize.INTEGER,
 		allowNull :false,
@@ -35,4 +46,4 @@ const User = db.define('user',{
 );
 
 db.sync();
-module.exports = User;
+module.exports = Document;

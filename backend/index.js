@@ -5,7 +5,6 @@ const {BACKEND_SERVER_IP_ADDR, PORT} = require('./env');
 
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 
@@ -20,16 +19,10 @@ db.authenticate().then(() => {
 
 const app = express();
 
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(cors("*"));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.use('/', require('./routes/routes'));
-
 
 
 app.use('/', require('./routes/routes'));
@@ -60,13 +53,13 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *  post:
  *    tags:
  *      - Authentication
- *    summary: Adding a Admin
+ *    summary: Adding a User
  *    parameters:
  *      - in: body
  *        name: body
- *        description: Adding the Admin data
+ *        description: Adding the user data
  *        required: true
- *        example: {"email":"krutikabhatt222@gmail.com", "username":"Krutika#123","password":"asdfghjkl","role":1}
+ *        example: {"email":"krutikabhatt222@gmail.com","password":"asdfghjkl"}
  *    responses:
  *      '200':
  *        description: successful operation
@@ -80,13 +73,13 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *  post:
  *    tags:
  *      - Authentication
- *    summary: Logging in Admin
+ *    summary: Logging in as User
  *    parameters:
  *      - in: body
  *        name: body
- *        description: Logging in User with username and password
+ *        description: Logging in User with email and password
  *        required: true
- *        example: {"username":"Test@123456","password":"Testing123"}
+ *        example: {"email":"krutikabhatt222@gmail.com","password":"Testing123"}
  *    responses:
  *      '200':
  *        description: Logged in succesfully
@@ -119,7 +112,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *        name: body
  *        description: Emailing password reset
  *        required: true
- *        example: {"email":"krutikabhatt222@gmail.com", "forgot_pass_page_url":"http://209.209.9.60:5000/student/forgotPass"}
+ *        example: {"email":"krutikabhatt222@gmail.com", "forgot_pass_page_url":"http://localhost:3000/user/forgotPass"}
  *    responses:
  *      '200':
  *        description: successful operation
