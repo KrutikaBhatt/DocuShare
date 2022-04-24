@@ -19,7 +19,7 @@ export default function DashboardHeader() {
                 <SearchIcon className="header_inputbutton"/>
             </div>
             <div className="header_icons">
-                <AddIcon className="header_icon"/>
+                <AddIcon className="header_icon add_icon"/>
                 <AppIcon className="header_icon"/>
                 <NotificationsIcon className="header_icon"/>
                 <img src="https://i.postimg.cc/PJJ8WHSW/avatars.png" alt="Krutika Bhatt" className="avatar_icon"/>
