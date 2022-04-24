@@ -10,19 +10,28 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "bootstrap": "^5.1.3",
+=======
+<<<<<<< HEAD
+    "@hookform/resolvers": "^2.8.8",
+    "bootstrap": "^5.1.3",
+=======
+>>>>>>> 73e38d8c4a69837c6ec40024ee9797370ade5baf
     "crypto": "^1.0.1",
     "crypto-js": "^4.1.1",
+>>>>>>> a7c07fe060836b7cb2ff6ba12c6835a8e89f0743
     "framer-motion": "^2.9.5",
-    "next": "^10.0.3",
+    "next": "^10.2.3",
     "next-compose-plugins": "^2.2.1",
     "next-optimized-images": "^2.6.2",
     "polished": "^4.0.5",
     "rc-drawer": "^4.1.0",
     "rc-tabs": "^11.7.2",
     "react": "^16.13.1",
+    "react-bootstrap": "^2.2.1",
     "react-dom": "^16.13.1",
     "react-ga": "^3.3.0",
     "react-icons": "^4.1.0",

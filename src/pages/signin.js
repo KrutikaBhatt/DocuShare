@@ -5,7 +5,7 @@ import AuthLayout from 'components/auth-layout';
 import SEO from 'components/seo';
 import SignInBox from 'sections/auth/signInBox';
 
-export default function LoginPage() {
+export default function SignInPage() {
     return (
         <ThemeProvider theme={theme}>
             <AuthLayout>

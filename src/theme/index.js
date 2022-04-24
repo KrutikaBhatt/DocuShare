@@ -105,7 +105,7 @@ export default {
       m: '0 auto',
     },
     toolbar: {
-      display: 'flex',
+      display:'block',
       alignItems: 'center',
       // justifyContent: 'space-between',
     },

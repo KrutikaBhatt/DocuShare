@@ -2,12 +2,41 @@
 import { jsx, Box, Flex, Container, Heading, Text } from 'theme-ui';
 import { rgba } from 'polished';
 
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 const SignInBox = () => {
   return (
     <Box as="section" id="home" sx={styles.section}>
-      <Container>
+      <Container style={{ backgroundColor: '#FFF4C8 ', width:"700px",height:"600px",borderRadius: '5px!important'}}>
         <Box sx={styles.contentWrapper}>
-          Signin Box
+        <form style={{margin: "155px;", width: "400px;", alignContent:"center"}}>
+                <h3>Register</h3>
+
+                <div className="form-group">
+                    <label>First name</label>
+                    <input type="text" className="form-control" placeholder="First name" />
+                </div>
+
+                <div className="form-group">
+                    <label>Last name</label>
+                    <input type="text" className="form-control" placeholder="Last name" />
+                </div>
+
+                <div className="form-group">
+                    <label>Email</label>
+                    <input type="email" className="form-control" placeholder="Enter email" />
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password" />
+                </div>
+
+                <button type="submit" className="btn btn-dark btn-lg btn-block"style={{marginTop:"10px"}}>Register</button>
+                <p className="forgot-password text-right">
+                    Already registered <a href="/login">log in?</a>
+                </p>
+            </form>
         </Box>
       </Container>
     </Box>
@@ -20,7 +49,7 @@ const styles = {
   section: {
     backgroundColor: '#FFFCF7',
     pt: [14, null, null, null, null, 0],
-    pb: [6, null, null, 7, 11, 0],
+    pb: [6, null, null, 7, 6, 0],
   },
   contentWrapper: {
     gap: ['50px 50px'],

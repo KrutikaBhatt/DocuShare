@@ -7,6 +7,7 @@ import 'swiper/swiper-bundle.css';
 import 'components/icons/icon-responsive.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'assets/css/custom.css';
+import '../sections/auth/login.css'
 
 export default function CustomApp({ Component, pageProps }) {
   useEffect(() => {

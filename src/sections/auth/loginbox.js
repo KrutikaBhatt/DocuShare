@@ -2,20 +2,44 @@
 import { jsx, Box, Flex, Container, Heading, Text } from 'theme-ui';
 import { rgba } from 'polished';
 
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-const LoginBox = () => {
+const SignInBox = () => {
   return (
-    <Box as="section" sx={styles.section}>
-      <Container>
-        Login
+    <Box as="section" id="home" sx={styles.section}>
+      <Container style={{ backgroundColor: '#FFF4C8 ', width:"700px",height:"600px",borderRadius: '5px!important'}}>
+        <Box sx={styles.contentWrapper}>
+        <form style={{margin: "160px;", width: "400px;", alignContent:"center"}}>
+                <h3>Login</h3>
+
+                <div className="form-group">
+                    <label>Email</label>
+                    <input type="email" className="form-control" placeholder="Enter email" />
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password" />
+                </div>
+
+                <button type="submit" className="btn btn-dark btn-lg btn-block" style={{marginTop:"10px"}}>Log In</button>
+                <p className="forgot-password text-right">
+                    <a href="#">forgot password?</a>
+                </p>
+            </form>
+        </Box>
       </Container>
     </Box>
   );
 };
 
-export default LoginBox;
+export default SignInBox;
 
 const styles = {
+  form:{
+    backgroundColor: '#FFFCF7',
+    alignItems:'centre'
+  },
   section: {
     backgroundColor: '#FFFCF7',
     pt: [14, null, null, null, null, 0],
