@@ -33,11 +33,13 @@ const createDocument =async(req,res) =>{
     try {
         console.log(req);
         const file = req.files;
-        const filename = file.name;
+        console.log(file);
+        const filename = file.originalname;
+        console.log(filename);
         const upload_docs = __dirname + "/upload/";
 
-        file.mv(`${upload_docs}${filename}`, (err) => {
-            if (err) {
+        file.mv(`${upload_docs}/${filename}`, (err) => {
+            if (err) {s
               res.status(500).send({ message: "File upload failed"});
             }
             console.log("File Uploaded");

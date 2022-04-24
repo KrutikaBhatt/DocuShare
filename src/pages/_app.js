@@ -5,6 +5,8 @@ import 'rc-drawer/assets/index.css';
 import 'rc-tabs/assets/index.css';
 import 'swiper/swiper-bundle.css';
 import 'components/icons/icon-responsive.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'assets/css/custom.css';
 
 export default function CustomApp({ Component, pageProps }) {
   useEffect(() => {
