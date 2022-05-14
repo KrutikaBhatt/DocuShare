@@ -12,6 +12,13 @@ export default function Sidebar() {
             <SidebarRow title="Sent" Icon={SendIcon}/>
             <SidebarRow title="Important" Icon={LabelImportantIcon}/>
             <SidebarRow title="Deleted" Icon={DeleteIcon}/>
+            <hr />
+            <SidebarRow title="Inbox" Icon={DraftsIcon}/>
+            <SidebarRow title="Sent" Icon={SendIcon}/>
+            <SidebarRow title="Important" Icon={LabelImportantIcon}/>
+            <SidebarRow title="Deleted" Icon={DeleteIcon}/>
+            <SidebarRow title="Important" Icon={LabelImportantIcon}/>
+            <SidebarRow title="Deleted" Icon={DeleteIcon}/>
         </div>
     );
 }
