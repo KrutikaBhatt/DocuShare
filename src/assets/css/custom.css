@@ -125,6 +125,8 @@
   margin-left: 20px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
+  position: relative;
+  z-index:1;
 }
 .view__more{
     color:rgb(114, 110, 110);
@@ -152,4 +154,15 @@ select > option {
     padding: 0.6rem;
     border: 1px solid darkgray;
     margin:0.2rem;
+}
+.pdf_viewer_modal{
+    height: 600px;
+    width: 600px;
+    margin-left: 30%;
+    overflow:hidden;
+    z-index: 999;
+    background-color:white;
+    position: absolute;
+    border:1px solid lightgray;
+    border-radius: 2px;
 }
