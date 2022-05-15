@@ -9,6 +9,8 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -26,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
       flexGrow: 1,
+    },
+    title_selection: {
+        marginLeft:30,
+        marginTop:15,
     },
     container: {
       marginTop: theme.spacing(2),
@@ -55,10 +61,11 @@ const BookDelete = id => {
 function MainSection() {
     const classes = useStyles();
     const isLoading = false;
-    const books = [{_id:"124683974",
-                    title: "Hello Everyone",
-                    quantity_total: 41,
-                    quantity_in_library: 21
+    const books = [{_id:"1",
+                    title: "Amendment Letter for Approval",
+                    sent_on: '15-05-2022',
+                    status: 'Pending',
+                    signers: ["Riya Gori","Aishwarya","Shaurya"]
                     }];
     
     return (
@@ -75,7 +82,7 @@ function MainSection() {
             <div className={classes.root}>
             <Container className={classes.container} maxWidth="lg">    
                 <Paper className={classes.paper}>
-                <Box display="flex">
+                <Box display="flex" className={classes.title_selection}>
                     <Box flexGrow={1}>
                     <Typography component="h2" variant="h6" color="primary" gutterBottom>
                         INBOX
@@ -87,10 +94,11 @@ function MainSection() {
                     <TableHead>
                     <TableRow>
                         <TableCell align="center">ID</TableCell>
-                        <TableCell align="left">Name</TableCell>
-                        <TableCell align="center">Total Quantity</TableCell>
-                        <TableCell align="center">Availability</TableCell>
+                        <TableCell align="left">Title</TableCell>
+                        <TableCell align="center">Sent on</TableCell>
+                        <TableCell align="center">Status</TableCell>
                         <TableCell align="center">Action</TableCell>
+                        <TableCell align="center">Recepients</TableCell>
                         <TableCell align="center">View</TableCell>
                     </TableRow>
                     </TableHead>
@@ -100,13 +108,20 @@ function MainSection() {
                             <TableCell align="center">{book._id.slice(-4)}</TableCell>
                         
                             <TableCell align="left">{book.title}</TableCell>
-                            <TableCell align="center">{book.quantity_total}</TableCell>
-                            <TableCell align="center">{book.quantity_in_library}</TableCell>
+                            <TableCell align="center">{book.sent_on}</TableCell>
+                            <TableCell align="center">{book.status}</TableCell>
                             <TableCell align="center">
                                 <ButtonGroup color="primary" aria-label="outlined primary button group">
                                 <Button>Edit</Button>
-                                <Button onClick={() => BookDelete(book._id)}>Delete</Button>
+                                <Button>Remind</Button>
                                 </ButtonGroup>
+                            </TableCell>
+                            <TableCell align="center">
+                                <select>
+                                    {book.signers.map((name1) => (
+                                        <option value={name1}> {name1}</option>
+                                    ))}
+                                </select>
                             </TableCell>
                             <TableCell align="center">
                                <VisibilityIcon className="view__more"/>
