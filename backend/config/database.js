@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-const db = new Sequelize("docushare", "root", "password%123", {
+const db = new Sequelize("docushare", "root", "password*", {
   host: "localhost",
   dialect: "mysql",
   pool: {
