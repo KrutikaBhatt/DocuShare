@@ -13,6 +13,7 @@ const db = require('../config/database');
 const cookieSession = require('cookie-session');
 const fetch = require('node-fetch');
 const upload = require('multer')();
+const docusign = require("docusign-esign");
 
 var transport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -73,7 +74,113 @@ const createDocument =async(req,res) =>{
     }
 }
 
+
+const sendEnvelopeUsingEmbeddedSending = async (req,res) => {
+    
+    var args={
+      accessToken: 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQsAAAABAAUABwCABV1LCDfaSAgAgEWAWUs32kgCAGxL5x2OYQxArdtjVEsSfo8VAAEAAAAYAAEAAAAFAAAADQAkAAAANDVmODg5NzAtYWVhYi00MzZlLTlmYjgtOGRiMGQzZmZmYzBkIgAkAAAANDVmODg5NzAtYWVhYi00MzZlLTlmYjgtOGRiMGQzZmZmYzBkEgABAAAACwAAAGludGVyYWN0aXZlMACA2CtKCDfaSDcAwwJ29AxY9kKK5KrHfyx51g.YY0BnLGgsMyi-ma7oSjw3pqnlOpwYJoCy6iZPqHyaZxF_Op-Dp4AX0HHfiSK7o4vlQNNfOyGbygLhasyUoszzaNlihHOmQVUHtBXVRUrUonT9tLMgYBnra9-s2qBh4cuaMXLu9nEXGmxSVQejBSutzX5D5HZbmW5ct-Oi47ZF-hT22a26qxJFFifEVNsoTO8IgsBokcJy-rAkNKzpjZMT3bebC3sTRiuHsg_EpueSK_AAxMzf8zemiZ3pgPx7MMePQbwQ0DqMBDePePnvRUTJnM4Z2UyVLqrY3oxrLtdExhPWNKzdTWqYeMrbCBmyowsoCRNkFYO7HAvXhaPvj8aFA',
+      basePath: 'https://demo.docusign.net/restapi',
+      accountId: 'b8b14b35-52e5-4d6b-89dc-0b57f270cf03',
+        startingView: 'tagging',
+        envelopeArgs: {
+            signerEmail: ['krutika.bhatt@somaiya.edu','krutikabhatt222@gmail.com'],
+            signerName: ['Krutika Bhatt','Diamonds Shine'],
+            dsReturnUrl: 'http://localhost:3000/ds-return',
+            doc2File: 'C:/Users/User/Desktop/agency-alpha-next/backend/controller/sample-pdf.pdf'
+        }
+    }
+    
+    let dsApiClient = new docusign.ApiClient();
+    dsApiClient.setBasePath(args.basePath);
+    dsApiClient.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
+    let envelopesApi = new docusign.EnvelopesApi(dsApiClient);
+  
+    // Step 1. Make the envelope with "created" (draft) status
+    args.envelopeArgs.status = "created"; // We want a draft envelope
+  
+    let envelope = makeEnvelope(args.envelopeArgs);
+  
+    let results = await envelopesApi.createEnvelope(args.accountId, {
+      envelopeDefinition: envelope,
+    });
+    let envelopeId = results.envelopeId;
+  
+    // Step 2. create the sender view
+    let viewRequest = makeSenderViewRequest(args.envelopeArgs);
+    console.log("This make Sender Request is done");
+    results = await envelopesApi.createSenderView(args.accountId, envelopeId, {
+      returnUrlRequest: viewRequest,
+    });
+
+    console.log("In results log");
+    // Switch to Recipient and Documents view if requested by the user
+    let url = results.url;
+    console.log(`startingView: ${args.startingView}`);
+    if (args.startingView === "recipient") {
+      url = url.replace("send=1", "send=0");
+    }
+  
+    //return { envelopeId: envelopeId, redirectUrl: url };
+    return res.status(200).json({ envelopeId: envelopeId, redirectUrl: url });
+  };
+
+  function makeSenderViewRequest(args) {
+    let viewRequest = new docusign.ReturnUrlRequest();
+  
+    viewRequest.returnUrl = args.dsReturnUrl;
+    return viewRequest;
+  }
+  
+  function makeEnvelope(args) {
+  
+    let doc2DocxBytes, doc3PdfBytes;
+  
+    doc2DocxBytes = fs.readFileSync(args.doc2File);
+ 
+    let env = new docusign.EnvelopeDefinition();
+    env.emailSubject = "Please sign this document set";
+  
+    // add the documents
+    let doc1 = new docusign.Document(),
+      doc2b64 = Buffer.from(doc2DocxBytes).toString("base64");
+    
+    let doc2 = new docusign.Document.constructFromObject({
+      documentBase64: doc2b64,
+      name: "Battle Plan", 
+      fileExtension: "pdf",
+      documentId: "1",
+    });
+  
+    env.documents = [doc2];
+ 
+    var Allsigners =[];
+    var signerEmail_list = args.signerEmail;
+    var signerName_list = args.signerName;
+    var recIDs = 1;
+    for(var i=0;i<signerEmail_list.length;i++){
+        var signer1 = docusign.Signer.constructFromObject({
+            email: signerEmail_list[i],
+            name: signerName_list[i],
+            recipientId: recIDs.toString(),
+            routingOrder: recIDs.toString(),
+        });
+        Allsigners.push(signer1);
+        recIDs = parseInt(recIDs) + 1;
+    }
+   
+    console.log("All signers :",Allsigners);
+    let recipients = docusign.Recipients.constructFromObject({
+      signers: Allsigners
+    });
+    env.recipients = recipients;
+  
+    env.status = args.status;
+  
+    return env;
+  }
+
 var document_controller = {
-    createDocument : createDocument
+    createDocument : createDocument,
+    sendEnvelopeUsingEmbeddedSending : sendEnvelopeUsingEmbeddedSending
 };
 module.exports = document_controller;
