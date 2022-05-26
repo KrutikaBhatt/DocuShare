@@ -78,13 +78,13 @@ const createDocument =async(req,res) =>{
 const sendEnvelopeUsingEmbeddedSending = async (req,res) => {
     
     var args={
-      accessToken: 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQsAAAABAAUABwCABV1LCDfaSAgAgEWAWUs32kgCAGxL5x2OYQxArdtjVEsSfo8VAAEAAAAYAAEAAAAFAAAADQAkAAAANDVmODg5NzAtYWVhYi00MzZlLTlmYjgtOGRiMGQzZmZmYzBkIgAkAAAANDVmODg5NzAtYWVhYi00MzZlLTlmYjgtOGRiMGQzZmZmYzBkEgABAAAACwAAAGludGVyYWN0aXZlMACA2CtKCDfaSDcAwwJ29AxY9kKK5KrHfyx51g.YY0BnLGgsMyi-ma7oSjw3pqnlOpwYJoCy6iZPqHyaZxF_Op-Dp4AX0HHfiSK7o4vlQNNfOyGbygLhasyUoszzaNlihHOmQVUHtBXVRUrUonT9tLMgYBnra9-s2qBh4cuaMXLu9nEXGmxSVQejBSutzX5D5HZbmW5ct-Oi47ZF-hT22a26qxJFFifEVNsoTO8IgsBokcJy-rAkNKzpjZMT3bebC3sTRiuHsg_EpueSK_AAxMzf8zemiZ3pgPx7MMePQbwQ0DqMBDePePnvRUTJnM4Z2UyVLqrY3oxrLtdExhPWNKzdTWqYeMrbCBmyowsoCRNkFYO7HAvXhaPvj8aFA',
+      accessToken: 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQsAAAABAAUABwCAGfH5RD_aSAgAgFkUCIg_2kgCAGxL5x2OYQxArdtjVEsSfo8VAAEAAAAYAAEAAAAFAAAADQAkAAAAOWMzN2M2YTMtYjg1Ni00ODNlLTk5OWYtNmU5MDNhMTY0ZTVkIgAkAAAAOWMzN2M2YTMtYjg1Ni00ODNlLTk5OWYtNmU5MDNhMTY0ZTVkEgABAAAACwAAAGludGVyYWN0aXZlMAAAVif4RD_aSDcAwwJ29AxY9kKK5KrHfyx51g.2Lf5RdRqgpoCazS5zuamlk6c1lk3oIPJvxsqQ1i6WklbA0jr7up0Is2kUWyLjHgUFwYUa2E4Nrq8X9l4k_8yAOH7wN-E3PhSn8ZiiFyO2qJKbVT3IX65ftFF3WflURLWGWykg0ChMuD2TNqVXof-0U6y5xWhCbjjQz3Gw97M_RwNR9-8Tws0b6Qqn4zPstxK2mMc4YZSmE9jv_kSk7WXFK31FxM13lIwgeOcV_1C4p5Eohd4MDBxIE3IhyEk-ZTpcvT52l0dQfZtUDUJE4xLw2lMQuXUZfHe4tSd9qVDpz5ZPMLKrZ8fWQMiT1U6LcsWb_xoEJRVq3qPd2nzbIVeSg',
       basePath: 'https://demo.docusign.net/restapi',
       accountId: 'b8b14b35-52e5-4d6b-89dc-0b57f270cf03',
         startingView: 'tagging',
         envelopeArgs: {
             signerEmail: ['krutika.bhatt@somaiya.edu','krutikabhatt222@gmail.com'],
-            signerName: ['Krutika Bhatt','Diamonds Shine'],
+            signerName: ['Krutika Bhatt','Riya Gori'],
             dsReturnUrl: 'http://localhost:3000/ds-return',
             doc2File: 'C:/Users/User/Desktop/agency-alpha-next/backend/controller/sample-pdf.pdf'
         }
@@ -177,7 +177,21 @@ const sendEnvelopeUsingEmbeddedSending = async (req,res) => {
     env.status = args.status;
   
     return env;
-  }
+}
+
+const AllSentDocuments = async(req,res) =>{
+    try {
+        var userID = req.body.userID;
+        var getAll = await Document.findAll({
+            where:{
+                owner_id:userID,
+            },
+          });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 var document_controller = {
     createDocument : createDocument,
