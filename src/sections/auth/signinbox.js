@@ -151,6 +151,23 @@ import { rgba } from 'polished';
 import signinimg from 'assets/images/sign-up.png'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Image from 'components/image';
+
+const submitContact = async (event) => {
+  event.preventDefault();
+  const name = event.target.name.value;
+  const res = fetch('http://localhost:5000/auth/register', {
+    body: JSON.stringify({
+      "email":email,
+      "password": password,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+  });
+  const result = await res.json();
+  alert(`done registration`);
+};
 const SignInBox = () => {
   return (
     <Box as="section" id="home" sx={styles.section} overflow="hidden" height="650px !important" display="none">
@@ -164,32 +181,34 @@ const SignInBox = () => {
 
                  <div className="form-group">
                      <label>First name</label>
-                     <input type="text" className="form-control" placeholder="First name" />
+                     <input type="text" className="form-control" placeholder="First name" id='name'/>
                  </div>
 
                  <div className="form-group">
                      <label>Last name</label>
-                     <input type="text" className="form-control" placeholder="Last name" />
+                     <input type="text" className="form-control" placeholder="Last name" id='lastname' />
                  </div>
 
                  <div className="form-group">
                      <label>Email</label>
-                     <input type="email" className="form-control" placeholder="Enter email" />
+                     <input type="email" className="form-control" placeholder="Enter email" id='email' />
                  </div>
 
                  <div className="form-group">
                      <label>Password</label>
-                     <input type="password" className="form-control" placeholder="Enter password" />
+                     <input type="password" className="form-control" placeholder="Enter password" id='password' />
                  </div>
 
-                 <button type="submit" className="btn btn-dark btn-lg btn-block"style={{marginTop:"10px"}}>Register</button>
+                 <button type="submit" onSubmit={submitContact} className="btn btn-dark btn-lg btn-block"style={{marginTop:"10px"}}>Register</button>
                  <p className="forgot-password text-right">
                      Already registered <a href="/login">log in?</a>
                  </p>
             </form>
+            
         </Box>
       </Container>
     </Box>
+    
   );
 };
 
