@@ -11,10 +11,36 @@ import UploadDocImage from 'assets/images/add_doc.png';
 import axios from "axios"
 import create_new from './create_new';
 import { CenterFocusWeakTwoTone } from "@material-ui/icons";
-
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 
 export default function DashboardHeader() {
     const [New_doc,setNew] = useState(false);
+    const [type,setType] = useState("");
+    const [title,setTitle] = useState("");
+
+    const ADD = (e) => {
+        e.preventDefault();
+        var send_type;
+        if(type == 'Esignature'){
+            send_type = 1;
+        }
+        else{
+            send_type = 2;
+        }
+        const send_body ={
+           type : send_type,
+           title : title
+        };
+        axios.post(`http://localhost:5000/document/send`,send_body)
+        .then(resp =>{
+            console.log(resp.data);
+            window.location.href = resp.data.redirectUrl;
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    }
 
     return (
         <>
@@ -39,22 +65,39 @@ export default function DashboardHeader() {
                         <div className="form__label">Sender : </div>
                         <div className="form__label">  Krutika Bhatt</div>
                     </div>
+
                     <hr/>
                     <Form.Group controlId="formName" className="form__inline">
                         <Form.Label className="form__label">Recepients: </Form.Label>
                         <Form.Control type="text" placeholder="Enter receivers" required/>
                     </Form.Group>
                     <hr />
-                    <Form.Group controlId="formName" className="form__inline">
+                    <Form.Group controlId="formName" className="form__inline" onChange={(e) => setTitle(e.target.value)}>
                         <Form.Label className="form__label">Title: </Form.Label>
                         <Form.Control type="text" placeholder="title" required/>
                     </Form.Group>
                     <hr/>
+                    <Form.Group className="form__inline">
+                    <Form.Label className="form__label">Type</Form.Label>
+                    <Form.Select aria-label="Select gender" onChange={(e) => setType(e.target.value)}>
+                            <option>Open this select menu</option>
+                            <option value="Esignature">Esignature</option>
+                            <option value="Gradebook">Gradebook</option>
+                    </Form.Select>
+                    </Form.Group>
+                    <hr/>
                     <div style={{display:'block',textAlign:'center',cursor:'pointer'}}>
+                        
                         <img src={UploadDocImage} height="100px"/>
                         <h4>Upload File</h4>
+                        <input style={{ textAlign:'center',justifyContent:'center',marginLeft:'70px',marginTop:'5px'}} type="file" />
                     </div>
                 </div>
+                <Box style={{marginLeft:'20px'}}>
+                        <Button variant="contained" color="primary" style={{fontSize:14}} onClick={ADD}>
+                        SEND
+                        </Button>
+                </Box>
             </div>
             
         )}

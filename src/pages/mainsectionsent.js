@@ -46,28 +46,35 @@ function Sent() {
     const [selectedTitle,setselectedTitle] = useState("");
 
     const isLoading = false;
-    const books = [{_id:"1",
-                    title: "Mail to explain design of webpage",
-                    sent_on: '15-05-2022',
-                    status: 'Pending',
-                    signers: ["Riya Gori","Aishwarya","Shaurya"],
-                    url: "http://www.africau.edu/images/default/sample.pdf"
-                    },
-                    {_id:"2",
-                    title: "Request to increase lifts in college",
-                    sent_on: '02-02-2022',
-                    status: 'Approved',
-                    signers: ["Aishwarya","Shaurya"],
-                    url: "https://smallpdf.com/handle-widget#url=https://assets.ctfassets.net/l3l0sjr15nav/29D2yYGKlHNm0fB2YM1uW4/8e638080a0603252b1a50f35ae8762fd/Get_Started_With_Smallpdf.pdf"
-                    },
-                    {_id:"3",
-                    title: "Signed Stamp for External Project",
-                    sent_on: '28-01-2022',
-                    status: 'Approved',
-                    signers: ["Aishwarya"],
-                    url: "https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf"
-                    }
-                ];
+    const books = [
+            {
+                _id: '5',
+                title: 'Esignature',
+                sent_on: "27-05-2022",
+                status: 'Pending',
+                signers: ["Krutika Bhatt","Riya Gori"],
+                url: "https://demo.docusign.net/signing/emails/v2-a390f5d471f14da3a55d06939e4521d648c8e50ff42a4a2fae7900fe204f510ec4f0f13975e3470fa7b6d54ff9051960",
+                sign: "https://demo.docusign.net/signing/emails/v2-a390f5d471f14da3a55d06939e4521d648c8e50ff42a4a2fae7900fe204f510ec4f0f13975e3470fa7b6d54ff9051960"
+            },
+            {
+                _id: '4',
+                title: 'Gradebook',
+                sent_on: "27-05-2022",
+                status: 'Pending',
+                signers: ["Krutika Bhatt","Riya Gori"],
+                url: "https://demo.docusign.net/signing/emails/v2-a390f5d471f14da3a55d06939e4521d65c05e0c5526f4e59b956d94a09c9e1163a9115deeedd4baf8a353bb0cfe992f3",
+                sign: "https://demo.docusign.net/signing/emails/v2-a390f5d471f14da3a55d06939e4521d65c05e0c5526f4e59b956d94a09c9e1163a9115deeedd4baf8a353bb0cfe992f3"
+            },
+            {_id:"1",
+                title: "Amendment Letter for Approval",
+                sent_on: '15-05-2022',
+                status: 'Pending',
+                signers: ["Riya Gori","Aishwarya","Shaurya"],
+                url: "http://www.africau.edu/images/default/sample.pdf",
+                sign: "#"
+            },
+            
+            ];
     
     return (
         <>
@@ -125,7 +132,6 @@ function Sent() {
                         <TableCell align="left">Title</TableCell>
                         <TableCell align="center">Sent on</TableCell>
                         <TableCell align="center">Status</TableCell>
-                        <TableCell align="center">Action</TableCell>
                         <TableCell align="center">Recepients</TableCell>
                         <TableCell align="center">View</TableCell>
                     </TableRow>
@@ -135,7 +141,7 @@ function Sent() {
                         <TableRow key={book._id}>
                             <TableCell align="center">{book._id.slice(-4)}</TableCell>
                         
-                            <TableCell align="left">{book.title}</TableCell>
+                            <TableCell align="left"><a href={book.sign}>{book.title}</a></TableCell>
                             <TableCell align="center">{book.sent_on}</TableCell>
                             {book.status == 'Approved'?(
                                 <TableCell align="center" style={{color:"green"}}>{book.status}</TableCell>
@@ -148,12 +154,7 @@ function Sent() {
                                 )}
                                 </>
                             )}                        
-                            <TableCell align="center">
-                                <ButtonGroup color="primary" aria-label="outlined primary button group">
-                                <Button>Edit</Button>
-                                <Button>Remind</Button>
-                                </ButtonGroup>
-                            </TableCell>
+                            
                             <TableCell align="center">
                                 <select>
                                     {book.signers.map((name1) => (

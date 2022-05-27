@@ -168,7 +168,7 @@ select > option {
     border-radius: 2px;
 }
 .create_new_document {
-    height: 500px;
+    height: 570px;
     width: 800px;
     margin-left: 25%;
     margin-top:8%;
@@ -176,7 +176,7 @@ select > option {
     z-index: 999;
     background-color:white;
     position: absolute;
-    border:1px solid lightgray;
+    border:2px solid lightgray;
     border-radius: 2px;
 }
 .form_description {
@@ -195,4 +195,8 @@ select > option {
     font-weight: 400;
     margin:4px;
     margin-right: 6px;
+}
+a, a:hover, a:focus, a:active {
+    text-decoration: none !important;
+    color: inherit !important;
 }

@@ -76,17 +76,28 @@ const createDocument =async(req,res) =>{
 
 
 const sendEnvelopeUsingEmbeddedSending = async (req,res) => {
-    
+    var signerEmail = req.body.signerEmail;
+    var signerName = req.body.signerName;
+    console.log(req);
+    var title = req.body.title;
+    var type = req.body.type;
+    var File = 'C:/Users/User/Desktop/agency-alpha-next/backend/controller/sample-pdf.pdf';
+    if(type == 1){
+      var File = 'C:/Users/User/Desktop/agency-alpha-next/backend/controller/Dummy-Application.pdf'
+    }
+    else {
+      var File = 'C:/Users/User/Desktop/agency-alpha-next/backend/controller/Gradebook.pdf'
+    }
     var args={
-      accessToken: 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQsAAAABAAUABwCAGfH5RD_aSAgAgFkUCIg_2kgCAGxL5x2OYQxArdtjVEsSfo8VAAEAAAAYAAEAAAAFAAAADQAkAAAAOWMzN2M2YTMtYjg1Ni00ODNlLTk5OWYtNmU5MDNhMTY0ZTVkIgAkAAAAOWMzN2M2YTMtYjg1Ni00ODNlLTk5OWYtNmU5MDNhMTY0ZTVkEgABAAAACwAAAGludGVyYWN0aXZlMAAAVif4RD_aSDcAwwJ29AxY9kKK5KrHfyx51g.2Lf5RdRqgpoCazS5zuamlk6c1lk3oIPJvxsqQ1i6WklbA0jr7up0Is2kUWyLjHgUFwYUa2E4Nrq8X9l4k_8yAOH7wN-E3PhSn8ZiiFyO2qJKbVT3IX65ftFF3WflURLWGWykg0ChMuD2TNqVXof-0U6y5xWhCbjjQz3Gw97M_RwNR9-8Tws0b6Qqn4zPstxK2mMc4YZSmE9jv_kSk7WXFK31FxM13lIwgeOcV_1C4p5Eohd4MDBxIE3IhyEk-ZTpcvT52l0dQfZtUDUJE4xLw2lMQuXUZfHe4tSd9qVDpz5ZPMLKrZ8fWQMiT1U6LcsWb_xoEJRVq3qPd2nzbIVeSg',
+      accessToken: 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQsAAAABAAUABwAAzESFkj_aSAgAAAxok9U_2kgCAGxL5x2OYQxArdtjVEsSfo8VAAEAAAAYAAEAAAAFAAAADQAkAAAAOWMzN2M2YTMtYjg1Ni00ODNlLTk5OWYtNmU5MDNhMTY0ZTVkIgAkAAAAOWMzN2M2YTMtYjg1Ni00ODNlLTk5OWYtNmU5MDNhMTY0ZTVkEgABAAAACwAAAGludGVyYWN0aXZlMACACHuDkj_aSDcAwwJ29AxY9kKK5KrHfyx51g.YHen_OGPYpdVBzOFnM2gp5L2HuUR4TctOYVhAQlVazZ74dyc7sMJyvuFEDRrmNlHO4nK3rMY13HhE4Co21jK0_Nh0Lds8cfBiwOG1afgZFFxfHP_uckKYKkc87wKwpmkQ0Nqng57UdbA8a9WQEGRs0aTa3EYAupuHalcAmIeIv5gctAftugtwwtZhWnXF1uLfMSesskfKbLBtaQq6f0QYd6UmWfvLDicKGoPZGJDLPTWqrX4CaMG1QDgNmnSaZouqGut8o7e8qyHdQj2tO9SUDtlKFH5TYLSV5BQZggBLWCLagFtjPoGJqKUtL1DXH5Wox945Or0skY-wrPNdwEKAQ',
       basePath: 'https://demo.docusign.net/restapi',
       accountId: 'b8b14b35-52e5-4d6b-89dc-0b57f270cf03',
         startingView: 'tagging',
         envelopeArgs: {
-            signerEmail: ['krutika.bhatt@somaiya.edu','krutikabhatt222@gmail.com'],
+            signerEmail: ['krutika.bhatt@somaiya.edu','riya.vg@somaiya.edu'],
             signerName: ['Krutika Bhatt','Riya Gori'],
-            dsReturnUrl: 'http://localhost:3000/ds-return',
-            doc2File: 'C:/Users/User/Desktop/agency-alpha-next/backend/controller/sample-pdf.pdf'
+            dsReturnUrl: 'http://localhost:3000/dashboard',
+            doc2File: File
         }
     }
     
@@ -146,7 +157,7 @@ const sendEnvelopeUsingEmbeddedSending = async (req,res) => {
     
     let doc2 = new docusign.Document.constructFromObject({
       documentBase64: doc2b64,
-      name: "Battle Plan", 
+      name: "Application Esignature", 
       fileExtension: "pdf",
       documentId: "1",
     });
