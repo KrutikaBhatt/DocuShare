@@ -1,38 +1,85 @@
+
 /** @jsx jsx */
 import { jsx, Box, Flex, Container, Heading, Text } from 'theme-ui';
 import { rgba } from 'polished';
-import loginimg from 'assets/images/log-in.png'
+import { useState } from 'react';
+import signinimg from 'assets/images/sign-up.png'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Image from 'components/image';
+
+const submitContact = async (event) => {
+//   try {
+//     const result = await excuteQuery({
+//         query: 'INSERT INTO users (email, password) VALUES(?, ?)',
+//         values: [email, password],
+//     });
+//     console.log( result );
+// } catch ( error ) {
+//     console.log( error );
+// }
+  e.preventDefault();
+  const res = fetch('http://localhost:5000/auth/register', {
+    body: JSON.stringify({
+      'email': email,
+      'password': password
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+  });
+  const { error } = await res.json();
+      if (error) {
+        console.log(error);
+        return;
+      }
+  alert(`done registration`);
+};
 const SignInBox = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <Box as="section" id="home" sx={styles.section} overflow="hidden" height="650px !important" display="none">
       <Container style={{ backgroundColor: '#FFF4C8 ', width:"700px",height:"100%",borderRadius: '5px!important', overflow:"hidden"}}>
       <Flex as="figure" sx={styles.bannerImage}>
-            <Image src={loginimg} alt="loginImage"width="300px" height="400px" />
+            <Image src={signinimg} alt="loginImage"width="300px" height="400px" />
           </Flex>
         <Box sx={styles.contentWrapper}>
-        <form style={{marginLeft: "160px;",marginTop:"0px", width: "400px;", alignContent:"center"}}>
-                <h3>Login</h3>
+        <form style={{marginLeft: "160px;",marginTop:"0px", width: "400px;",height:"100%", alignContent:"center"}}>
+        <h3>Sign-Up</h3>
 
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
-                </div>
+                 <div className="form-group">
+                     <label>First name</label>
+                     <input type="text" className="form-control" placeholder="First name" id='name'/>
+                 </div>
 
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
+                 <div className="form-group">
+                     <label>Last name</label>
+                     <input type="text" className="form-control" placeholder="Last name" id='lastname' />
+                 </div>
 
-                <button type="submit" className="btn btn-dark btn-lg btn-block" style={{marginTop:"10px"}}>Log In</button>
-                <p className="forgot-password text-right">
-                    <a href="#">forgot password?</a>
-                </p>
+                 <div className="form-group">
+                     <label>Email</label>
+                     <input type="email" name="email" className="form-control" placeholder="Enter email" id='email' />
+                 </div>
+
+                 <div className="form-group">
+                     <label>Password</label>
+                     <input type="password" name="password" value={password}onChange={(e) => {
+              setPassword(e.target.value);
+            }} className="form-control" placeholder="Enter password" id='password' />
+                 </div>
+
+                 <button type="submit" onSubmit={submitContact} className="btn btn-dark btn-lg btn-block"style={{marginTop:"10px"}}>Register</button>
+                 <p className="forgot-password text-right">
+                     Already registered <a href="/login">log in?</a>
+                 </p>
             </form>
+            
         </Box>
       </Container>
     </Box>
+    
   );
 };
 
@@ -51,11 +98,11 @@ const styles = {
     pb: [6, null, null, 7, 11, 0],
   },
   contentWrapper: {
-    // gap: ['50px 50px'],
+     gap: ['50px 50px'],
     marginTop:'0px',
     display: ['block', null, null, null, 'grid'],
     gridTemplateColumns: [null, null, null, null, '1fr 1fr', '0.95fr 1.05fr'],
-    // alignItems: 'center',
+     alignItems: 'center',
     minHeight: ['auto', null, null, null, '38vh', '100vh'],
     pt: [null, null, null, 8, 0, 9, null],
     '@media only screen and (min-width:1900px)': {
