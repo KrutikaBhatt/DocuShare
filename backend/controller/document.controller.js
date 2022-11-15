@@ -95,8 +95,8 @@ const sendEnvelopeUsingEmbeddedSending = async (req,res) => {
       accountId: "12708c4e-c635-49c5-8f13-1d9e6546931a",
       startingView: "tagging",
       envelopeArgs: {
-        signerEmail: ["krutika.bhatt@somaiya.edu", "krutikabhatt222@gmail.com"],
-        signerName: ["Krutika Bhatt", "Riya Gori"],
+        signerEmail: ["riya.vg@somaiya.edu", "p.hotchandani@somaiya.edu"],
+        signerName: ["Riya Gori", "Priyanka Hotchandani"],
         dsReturnUrl: "http://localhost:3000/ds-return",
         doc2File:
           "C:/Users/User/Desktop/DocuShare/backend/controller/sample-pdf.pdf",
