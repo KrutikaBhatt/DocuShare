@@ -81,24 +81,26 @@ const sendEnvelopeUsingEmbeddedSending = async (req,res) => {
     console.log(req);
     var title = req.body.title;
     var type = req.body.type;
-    var File = 'C:/Users/User/Desktop/agency-alpha-next/backend/controller/sample-pdf.pdf';
+    var File = 'C:/Users/User/Desktop/DocuShare/backend/controller/sample-pdf.pdf';
     if(type == 1){
-      var File = 'C:/Users/User/Desktop/agency-alpha-next/backend/controller/Dummy-Application.pdf'
+      var File = 'C:/Users/User/Desktop/DocuShare/backend/controller/Dummy-Application.pdf'
     }
     else {
-      var File = 'C:/Users/User/Desktop/agency-alpha-next/backend/controller/Gradebook.pdf'
+      var File = 'C:/Users/User/Desktop/DocuShare/backend/controller/Gradebook.pdf'
     }
-    var args={
-      accessToken: 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQsAAAABAAUABwAAzESFkj_aSAgAAAxok9U_2kgCAGxL5x2OYQxArdtjVEsSfo8VAAEAAAAYAAEAAAAFAAAADQAkAAAAOWMzN2M2YTMtYjg1Ni00ODNlLTk5OWYtNmU5MDNhMTY0ZTVkIgAkAAAAOWMzN2M2YTMtYjg1Ni00ODNlLTk5OWYtNmU5MDNhMTY0ZTVkEgABAAAACwAAAGludGVyYWN0aXZlMACACHuDkj_aSDcAwwJ29AxY9kKK5KrHfyx51g.YHen_OGPYpdVBzOFnM2gp5L2HuUR4TctOYVhAQlVazZ74dyc7sMJyvuFEDRrmNlHO4nK3rMY13HhE4Co21jK0_Nh0Lds8cfBiwOG1afgZFFxfHP_uckKYKkc87wKwpmkQ0Nqng57UdbA8a9WQEGRs0aTa3EYAupuHalcAmIeIv5gctAftugtwwtZhWnXF1uLfMSesskfKbLBtaQq6f0QYd6UmWfvLDicKGoPZGJDLPTWqrX4CaMG1QDgNmnSaZouqGut8o7e8qyHdQj2tO9SUDtlKFH5TYLSV5BQZggBLWCLagFtjPoGJqKUtL1DXH5Wox945Or0skY-wrPNdwEKAQ',
-      basePath: 'https://demo.docusign.net/restapi',
-      accountId: 'b8b14b35-52e5-4d6b-89dc-0b57f270cf03',
-        startingView: 'tagging',
-        envelopeArgs: {
-            signerEmail: ['krutika.bhatt@somaiya.edu','riya.vg@somaiya.edu'],
-            signerName: ['Krutika Bhatt','Riya Gori'],
-            dsReturnUrl: 'http://localhost:3000/dashboard',
-            doc2File: File
-        }
+    var args = {
+      accessToken:
+        "eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQsAAAABAAUABwCA0Mkf1cbaSAgAgBDtLRjH2kgCAF1SYAto_zhAuApo6cb-JK4VAAEAAAAYAAEAAAAFAAAADQAkAAAAYjE5YTcwNWQtY2M1OC00MTgwLTk3NWMtNGNkMzk3YzRkYTZiIgAkAAAAYjE5YTcwNWQtY2M1OC00MTgwLTk3NWMtNGNkMzk3YzRkYTZiEgABAAAACwAAAGludGVyYWN0aXZlMACAdmcd1cbaSDcAxAS9wXAwCEK7S2ZNWcYcSA.HyZEy9k15tb19TPSHWHtoaEXMfxZnlOikBfZm22WkJti3exRyU1C-kOlU2b1meqw2jk13O2uU3cmL4_2so4O0-wtkWs2UoQAR47jyzYkuoy9xt4hqp87HTXYpae0sM3gpthyPv60jFsIg1D6cwuAQ7Q_CmFo2uzdJ36uGbLVFzEWn7xLc-kA42w_1gtP6dVgeoVWwiCCoh_TntqegyCx7q6X_vl9TSMV1w4B2zqgOeZ6gpLfKgjOWnITowWujaeq8dO_hxUq2AaL8vdXtDPgI-eZtA8519TzL9ThDgcrZOg_hm0KQTgWoAiIefPEQ6cE9YkrhSMX4-C_DuY6m2fLAg",
+      basePath: "https://demo.docusign.net/restapi",
+      accountId: "12708c4e-c635-49c5-8f13-1d9e6546931a",
+      startingView: "tagging",
+      envelopeArgs: {
+        signerEmail: ["krutika.bhatt@somaiya.edu", "krutikabhatt222@gmail.com"],
+        signerName: ["Krutika Bhatt", "Riya Gori"],
+        dsReturnUrl: "http://localhost:3000/ds-return",
+        doc2File:
+          "C:/Users/User/Desktop/DocuShare/backend/controller/sample-pdf.pdf",
+      },
     }
     
     let dsApiClient = new docusign.ApiClient();

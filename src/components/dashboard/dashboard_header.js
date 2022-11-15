@@ -63,7 +63,7 @@ export default function DashboardHeader() {
                 <div className="form_description">
                 <div className="form__inline">
                         <div className="form__label">Sender : </div>
-                        <div className="form__label">  Krutika Bhatt</div>
+                        <div className="form__label">  K123Riya Gori</div>
                     </div>
 
                     <hr/>

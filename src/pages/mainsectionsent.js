@@ -50,29 +50,37 @@ function Sent() {
             {
                 _id: '5',
                 title: 'Esignature',
-                sent_on: "27-05-2022",
+                sent_on: "27-10-2022",
                 status: 'Pending',
-                signers: ["Krutika Bhatt","Riya Gori"],
+                signers: ["Priyanka","Riya Gori"],
                 url: "https://demo.docusign.net/signing/emails/v2-a390f5d471f14da3a55d06939e4521d648c8e50ff42a4a2fae7900fe204f510ec4f0f13975e3470fa7b6d54ff9051960",
                 sign: "https://demo.docusign.net/signing/emails/v2-a390f5d471f14da3a55d06939e4521d648c8e50ff42a4a2fae7900fe204f510ec4f0f13975e3470fa7b6d54ff9051960"
             },
             {
                 _id: '4',
                 title: 'Gradebook',
-                sent_on: "27-05-2022",
+                sent_on: "27-10-2022",
                 status: 'Pending',
-                signers: ["Krutika Bhatt","Riya Gori"],
+                signers: ["Priyanka","Riya Gori"],
                 url: "https://demo.docusign.net/signing/emails/v2-a390f5d471f14da3a55d06939e4521d65c05e0c5526f4e59b956d94a09c9e1163a9115deeedd4baf8a353bb0cfe992f3",
                 sign: "https://demo.docusign.net/signing/emails/v2-a390f5d471f14da3a55d06939e4521d65c05e0c5526f4e59b956d94a09c9e1163a9115deeedd4baf8a353bb0cfe992f3"
             },
             {_id:"1",
                 title: "Amendment Letter for Approval",
-                sent_on: '15-05-2022',
+                sent_on: '15-11-2022',
                 status: 'Pending',
-                signers: ["Riya Gori","Aishwarya","Shaurya"],
+                signers: ["Riya Gori","Patil","Shaurya"],
                 url: "http://www.africau.edu/images/default/sample.pdf",
                 sign: "#"
             },
+            {_id:"6",
+                title: "NDA for upcoming internship",
+                sent_on: '15-11-2022',
+                status: 'Pending',
+                signers: ["Riya Gori"],
+                url: "https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf",
+                sign: "#"
+                }
             
             ];
     
