@@ -1,5 +1,14 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
 
+## Demonstration of the application
+Please find the recording link <a href="https://drive.google.com/file/d/1FfhNQ-jAgR5VrpHcnEvOAhPXBWzXzxq4/view?usp=sharing">here</a>
+
+![image](https://user-images.githubusercontent.com/65107474/228741070-20514609-9ba1-4998-9086-dee08eabe9b0.png)
+
+![image](https://user-images.githubusercontent.com/65107474/228741148-7e00498f-a92c-4ce5-9e87-b2a2c366895d.png)
+
+![image](https://user-images.githubusercontent.com/65107474/228741199-b8f68fe7-f572-4d39-9f4f-2aac630fd563.png)
+
 ## Getting Started
 
 First, run the development server:
